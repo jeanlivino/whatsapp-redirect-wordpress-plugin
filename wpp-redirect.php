@@ -2,8 +2,8 @@
 /*
 Plugin Name: Whatsapp Redirect
 Plugin URI: https://github.com/jeanlivino/wpp-redirect-wordpress
-Description: Plugin que gera shortcode para inserção do vooozer em seu blog.
-Version: 1
+Description: Create posttype to redirect users to whatsapp
+Version: 0.1
 Author: Jean Livino
 Author URI: https://jeanlivino.com.br/
 Text Domain: wpp-redirect
@@ -26,4 +26,18 @@ function wpp_jlh_create_posttypes() {
   );
 }
 add_action( 'init', 'wpp_jlh_create_posttypes' );
+
+function wpp_jlh_single_template($single) {
+
+    global $post;
+    if ( $post->post_type == 'whatsapp-redirect' ) {
+        if ( file_exists( plugin_dir_path( __FILE__ ) . 'wpp-template.php') ) {
+            return plugin_dir_path( __FILE__ ) . 'wpp-template.php';
+        }
+    }
+
+    return $single;
+}
+add_filter( 'single_template', 'wpp_jlh_single_template');
+
  ?>
