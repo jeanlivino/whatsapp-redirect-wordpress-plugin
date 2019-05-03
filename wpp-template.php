@@ -21,8 +21,8 @@ if ($iphone || $android || $palmpre || $ipod || $berry == true)
 }
 // all others
 else {
-  header('Location: https://api.whatsapp.com/send?phone='. $phone .'&text='.$message);
+  header('Location: https://web.whatsapp.com/send?phone='. $phone .'&text='.$message);
   //OR
-  echo "<script>window.location='https://api.whatsapp.com/send?phone='. $phone .'&text=".$message ."</script>";
+  echo "<script>window.location='https://web.whatsapp.com/send?phone='. $phone .'&text=".$message ."</script>";
 }
 	?>
