@@ -8,24 +8,26 @@ Author: Jean Livino
 Author URI: https://jeanlivino.com.br/
 Text Domain: wpp-redirect
 */
-// create the posttype
-function wpp_jlh_create_posttypes() {
-  register_post_type( 'whatsapp-redirect',
-      array(
-          'labels' => array(
-              'name' => __( 'Whatsapp Links' ),
-              'singular_name' => __( 'Whatsapp Link' )
-          ),
-          'menu_icon' => 'dashicons-admin-links',
-          'menu_position' => 5,
-          'public' => true,
-          'has_archive' => false,
-          'rewrite' => array('slug' => 'wpp', 'with_front' => false),
-          'supports' => array('title', 'editor')
-      )
-  );
+
+require_once(plugin_dir_path( __FILE__ ) . 'inc/posttype.php');
+require_once(plugin_dir_path( __FILE__ ) . 'inc/metabox.php');
+
+// Add inttel css
+add_action('admin_enqueue_scripts', 'jlh_wpp_admin_style');
+// change the single template
+add_filter( 'single_template', 'wpp_jlh_single_template');
+
+// Function to encode the text
+function wpp_jlh_encodeURI($uri)
+{
+    return preg_replace_callback("{[^0-9a-z_.!~*'();,/?:@&=+$#-]}i", function ($m) {
+        return sprintf('%%%02X', ord($m[0]));
+    }, $uri);
 }
-add_action( 'init', 'wpp_jlh_create_posttypes' );
+
+function jlh_wpp_admin_style() {
+  wp_enqueue_style('intl-phone', 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/15.0.2/css/intlTelInput.css');
+}
 
 function wpp_jlh_single_template($single) {
 
@@ -38,6 +40,5 @@ function wpp_jlh_single_template($single) {
 
     return $single;
 }
-add_filter( 'single_template', 'wpp_jlh_single_template');
 
  ?>

@@ -1,0 +1,12 @@
+.wpp_metabox label {
+  margin-top: 10px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+}
+.wpp_metabox input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+}
