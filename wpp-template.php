@@ -15,9 +15,9 @@ $ipod = strpos($_SERVER['HTTP_USER_AGENT'],"iPod");
 // check if is a mobile
 if ($iphone || $android || $palmpre || $ipod || $berry == true)
 {
-  header('Location: https://api.whatsapp.com/send?phone='. $phone .'&text='.$message);
+  header('Location: whatsapp://send?phone='. $phone .'&text='.$message);
   //OR
-  echo "<script>window.location='https://api.whatsapp.com/send?phone='. $phone .'&text=".$message ."</script>";
+  echo "<script>window.location='whatsapp://send?phone='. $phone .'&text=".$message ."</script>";
 }
 // all others
 else {
