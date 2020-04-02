@@ -26,7 +26,7 @@
 		echo '</style>'
 		?>
 
-			<fieldset class="wpp_metabox"">
+			<fieldset class="wpp_metabox">
 				<div>
 					<label for="_wpp_phone">
 						Phone Number
